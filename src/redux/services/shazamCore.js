@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 const RAPID_API_KEY = import.meta.env.VITE_SHAZAM_CORE_RAPID_API_KEY;
-const ITUNES_BASE_URL = import.meta.env.DEV ? '/api/itunes' : 'https://itunes.apple.com';
+const ITUNES_BASE_URL = '/api/itunes';
 
 const GENRE_TERM_MAP = {
   POP: 'pop hits',
