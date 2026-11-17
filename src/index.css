@@ -1,0 +1,151 @@
+@import "tailwindcss";
+
+@theme {
+  --color-black: #191624;
+
+  --animate-slideup: slideup 1s ease-in-out;
+  --animate-slidedown: slidedown 1s ease-in-out;
+  --animate-slideleft: slideleft 1s ease-in-out;
+  --animate-slideright: slideright 1s ease-in-out;
+  --animate-wave: wave 1.2s linear infinite;
+  --animate-slowfade: slowfade 2.2s ease-in-out;
+
+  @keyframes slowfade {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideup {
+    from {
+      opacity: 0;
+      transform: translateY(25%);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  @keyframes slidedown {
+    from {
+      opacity: 0;
+      transform: translateY(-25%);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  @keyframes slideleft {
+    from {
+      opacity: 0;
+      transform: translateX(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes slideright {
+    from {
+      opacity: 0;
+      transform: translateX(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes wave {
+    0% {
+      transform: scale(0);
+    }
+    50% {
+      transform: scale(1);
+    }
+    100% {
+      transform: scale(0);
+    }
+  }
+}
+
+:root {
+  color-scheme: dark;
+  --brand-accent: #22d3ee;
+}
+
+body {
+  accent-color: var(--brand-accent);
+}
+
+/* Active Navigation Link */
+.active {
+  @apply text-cyan-500;
+}
+
+.active svg {
+  @apply text-cyan-500;
+}
+
+/* Staggered equalizer bars using sibling-index() with @supports fallback */
+.bar {
+  --stagger-time: 0.2s;
+}
+
+@supports (animation-delay: calc(sibling-index() * 0.1s)) {
+  .bar {
+    animation-delay: calc((sibling-index() - 1) * var(--stagger-time));
+  }
+}
+
+@supports not (animation-delay: calc(sibling-index() * 0.1s)) {
+  .bar:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+  .bar:nth-child(3) {
+    animation-delay: 0.4s;
+  }
+  .bar:nth-child(4) {
+    animation-delay: 0.6s;
+  }
+  .bar:nth-child(5) {
+    animation-delay: 0.8s;
+  }
+  .bar:nth-child(6) {
+    animation-delay: 1s;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bar {
+    animation: none;
+  }
+}
+
+.smooth-transition {
+  transition: all 0.3s ease-in-out;
+}
+
+/* Hide scrollbar using standard scrollbar-width with WebKit fallback */
+.hide-scrollbar {
+  scrollbar-width: none;
+}
+
+@supports not (scrollbar-width: none) {
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Accessible focus indicator */
+:where(a:any-link, button, input, select):focus-visible {
+  outline: 2px solid var(--brand-accent);
+  outline-offset: 2px;
+}
